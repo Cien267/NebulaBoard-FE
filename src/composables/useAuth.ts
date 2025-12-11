@@ -17,6 +17,7 @@ const handleLogin = async (credentials: LoginRequest) => {
     user.value = response?.user
     Cookies.set(COOKIES_TOKEN_NAME, tokenUser, { expires: expires ? new Date(expires) : 1 })
     localStorage.setItem(LOCALSTORAGE_USER, JSON.stringify(response?.user))
+    return true
   } catch (error) {
     console.error('Login failed', error)
     throw error
