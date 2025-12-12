@@ -18,11 +18,13 @@ const router = createRouter({
       path: '/login',
       name: ROUTER_NAME_LIST.LOGIN_PAGE,
       component: LoginPage,
+      meta: { transition: 'slide-fade-left' },
     },
     {
       path: '/register',
       name: ROUTER_NAME_LIST.REGISTER_PAGE,
       component: RegisterPage,
+      meta: { transition: 'slide-fade-right' },
     },
     {
       path: '/dashboard',

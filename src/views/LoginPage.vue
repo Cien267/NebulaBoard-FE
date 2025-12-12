@@ -16,7 +16,6 @@ const email = ref('')
 const password = ref('')
 const submitting = ref(false)
 const errors = ref<{ email?: string; password?: string }>({})
-const showAdminModal = ref(false)
 
 const schema = LoginRequestSchema
 
@@ -117,7 +116,6 @@ async function onSubmit() {
         <router-link
           to="/register"
           class="text-sky-700! hover:text-sky-800! no-underline font-bold"
-          @click.prevent="showAdminModal = true"
         >
           Register</router-link
         >

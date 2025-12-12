@@ -1,6 +1,6 @@
 import { ref } from 'vue'
-import { login } from '@/services/authService'
-import type { LoginRequest } from '@/types/auth'
+import { login, register } from '@/services/authService'
+import type { LoginRequest, RegisterRequest } from '@/types/auth'
 import Cookies from 'js-cookie'
 
 const COOKIES_TOKEN_NAME = 'nebulaboard-token'
@@ -24,6 +24,16 @@ const handleLogin = async (credentials: LoginRequest) => {
   }
 }
 
+const handleRegister = async (data: RegisterRequest) => {
+  try {
+    await register(data)
+    return true
+  } catch (error) {
+    console.error('Register failed', error)
+    throw error
+  }
+}
+
 const handleLogout = () => {
   token.value = null
   user.value = null
@@ -36,6 +46,7 @@ export const useAuth = () => {
     token,
     user,
     handleLogin,
+    handleRegister,
     handleLogout,
   }
 }
