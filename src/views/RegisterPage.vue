@@ -185,7 +185,7 @@ async function onSubmit() {
       </p>
     </div>
   </div>
-  <Toast />
+  <Toast position="bottom-right" />
 </template>
 <style scoped>
 #left-side-image {

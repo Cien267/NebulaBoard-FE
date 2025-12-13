@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+#app {
+  overflow: hidden;
+}
+
 .p-inputtext.p-component.p-password-input {
   width: 100% !important;
 }
