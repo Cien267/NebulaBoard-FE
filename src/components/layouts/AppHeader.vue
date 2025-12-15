@@ -5,7 +5,7 @@
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-3 w-32 lg:w-56">
             <router-link to="/dashboard">
-              <Image src="/logo.png" alt="logo" width="60" />
+              <Image src="/favicon.ico" alt="logo" width="30" />
             </router-link>
           </div>
         </div>
