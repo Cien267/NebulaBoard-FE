@@ -30,7 +30,7 @@ const router = createRouter({
       path: '/dashboard',
       name: ROUTER_NAME_LIST.DASHBOARD_PAGE,
       component: DashboardPage,
-      meta: { requiresAuth: true },
+      meta: { requiresAuth: false },
     },
     { path: `/:notFound(.*)`, component: NotFoundPage },
   ],

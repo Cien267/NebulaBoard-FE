@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'primeicons/primeicons.css';
 
 #app {
   overflow: hidden;
@@ -35,3 +36,26 @@
   transform: translateX(-200px);
   opacity: 0;
 }
+
+/* /////////////// TAILWINDCSS /////////////// */
+@layer components {
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+  .border-only-left {
+    @apply border-solid border-l border-r-0 border-t-0 border-b-0;
+  }
+  .border-only-right {
+    @apply border-solid border-r border-l-0 border-t-0 border-b-0;
+  }
+  .border-only-bottom {
+    @apply border-solid border-b border-l-0 border-r-0 border-t-0;
+  }
+  .border-only-top {
+    @apply border-solid border-t border-l-0 border-r-0 border-b-0;
+  }
+}
+/* /////////////// END TAILWINDCSS /////////////// */
