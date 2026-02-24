@@ -2,7 +2,7 @@
   <div class="fixed top-20 left-10 z-9999">
     <div class="relative">
       <button
-        @click="isMenuOpen = !isMenuOpen"
+        @click="toggleMenu"
         class="absolute top-0 left-0 w-20 h-20 rounded-full bg-linear-to-br from-slate-200 to-slate-300 shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_2px_8px_rgba(255,255,255,0.8),inset_0_-2px_8px_rgba(0,0,0,0.1)] flex items-center justify-center z-10 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
       >
         <div
@@ -82,38 +82,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, shallowRef, computed, type CSSProperties } from 'vue'
-import DashboardIcon from '../icons/DashboardIcon.vue'
-import NoteIcon from '../icons/NoteIcon.vue'
-import TaskIcon from '../icons/TaskIcon.vue'
-import JournalIcon from '../icons/JournalIcon.vue'
-import MusicIcon from '../icons/MusicIcon.vue'
-import SettingIcon from '../icons/SettingIcon.vue'
+import { ref, type CSSProperties } from 'vue'
+import { useAppMenu } from '@/composables/useAppMenu'
+import { useRouter } from 'vue-router'
+import { ROUTER_NAME_LIST } from '@/constants/routers'
+const router = useRouter()
 
-const navItems = shallowRef([
-  { id: 'settings', label: 'Settings', icon: SettingIcon, isActive: false },
-  { id: 'music', label: 'Music', icon: MusicIcon, isActive: false },
-  { id: 'journal', label: 'Journal', icon: JournalIcon, isActive: false },
-  { id: 'tasks', label: 'Tasks', icon: TaskIcon, isActive: false },
-  { id: 'notes', label: 'Notes', icon: NoteIcon, isActive: false },
-  { id: 'dashboard', label: 'Dashboard', icon: DashboardIcon, isActive: true },
-])
+const { navItems, activeItem, activeItemLabel, isMenuOpen, handleUpdateActiveItem, toggleMenu } =
+  useAppMenu()
 
-const activeItem = ref('dashboard')
 const hoveredItem = ref<string | null>(null)
-const isMenuOpen = ref(false)
-
-const activeItemLabel = computed(() => {
-  return navItems.value.find((item) => item.id === activeItem.value)?.label
-})
-
-const handleSelectItem = (itemId: string) => {
-  activeItem.value = itemId
-  navItems.value.forEach((item) => {
-    item.isActive = item.id === itemId
-  })
-  navItems.value.sort((a, b) => Number(a.isActive) - Number(b.isActive))
-}
 
 const getButtonStyle = (index: number): CSSProperties => {
   const angle = index * (90 / (navItems.value.length - 1)) * (Math.PI / 180)
@@ -129,6 +107,11 @@ const getButtonStyle = (index: number): CSSProperties => {
     pointerEvents: isMenuOpen.value ? 'auto' : 'none',
     scale: isMenuOpen.value ? 1 : 0.8,
   }
+}
+
+const handleSelectItem = (itemId: string) => {
+  handleUpdateActiveItem(itemId)
+  router.push({ name: ROUTER_NAME_LIST[itemId.toUpperCase() + '_PAGE'] })
 }
 
 const getButtonClass = (itemId: string) => {

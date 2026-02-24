@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { ROUTER_NAME_LIST } from '@/constants/routers'
 import NotFoundPage from '@/views/NotFoundPage.vue'
-import LoginPage from '@/views/LoginPage.vue'
-import RegisterPage from '@/views/RegisterPage.vue'
-import DashboardPage from '@/views/DashboardPage.vue'
-import { useAuth } from '@/composables/useAuth'
+import LoginPage from '@/features/auth/views/LoginPage.vue'
+import RegisterPage from '@/features/auth/views/RegisterPage.vue'
+import DashboardPage from '@/features/dashboard/views/DashboardPage.vue'
+import { useAuth } from '@/features/auth/composables/useAuth'
+import TaskPage from '@/features/tasks/views/TaskPage.vue'
 
 const { token } = useAuth()
 const router = createRouter({
@@ -32,6 +33,36 @@ const router = createRouter({
       component: DashboardPage,
       meta: { requiresAuth: false },
     },
+    // {
+    //   path: '/notes',
+    //   name: ROUTER_NAME_LIST.NOTES_PAGE,
+    //   component: DashboardPage,
+    //   meta: { requiresAuth: false },
+    // },
+    {
+      path: '/tasks',
+      name: ROUTER_NAME_LIST.TASKS_PAGE,
+      component: TaskPage,
+      meta: { requiresAuth: false },
+    },
+    // {
+    //   path: '/journal',
+    //   name: ROUTER_NAME_LIST.JOURNAL_PAGE,
+    //   component: DashboardPage,
+    //   meta: { requiresAuth: false },
+    // },
+    // {
+    //   path: '/music',
+    //   name: ROUTER_NAME_LIST.MUSIC_PAGE,
+    //   component: DashboardPage,
+    //   meta: { requiresAuth: false },
+    // },
+    // {
+    //   path: '/settings',
+    //   name: ROUTER_NAME_LIST.SETTINGS_PAGE,
+    //   component: DashboardPage,
+    //   meta: { requiresAuth: false },
+    // },
     { path: `/:notFound(.*)`, component: NotFoundPage },
   ],
 })

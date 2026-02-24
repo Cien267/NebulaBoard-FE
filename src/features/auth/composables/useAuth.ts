@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { login, register } from '@/services/authService'
+import { login, register } from '../services/authService'
 import type { LoginRequest, RegisterRequest } from '@/types/auth'
 import Cookies from 'js-cookie'
 

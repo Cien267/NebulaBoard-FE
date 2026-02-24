@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { unref } from 'vue'
 import type { AxiosInstance } from 'axios'
-import { useAuth } from '@/composables/useAuth'
+import { useAuth } from '@/features/auth/composables/useAuth'
 import { useRouter } from 'vue-router'
 import { ROUTER_NAME_LIST } from '@/constants/routers'
 
