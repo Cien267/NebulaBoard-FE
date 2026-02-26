@@ -84,9 +84,6 @@
 <script setup lang="ts">
 import { ref, type CSSProperties } from 'vue'
 import { useAppMenu } from '@/composables/useAppMenu'
-import { useRouter } from 'vue-router'
-import { ROUTER_NAME_LIST } from '@/constants/routers'
-const router = useRouter()
 
 const { navItems, activeItem, activeItemLabel, isMenuOpen, handleUpdateActiveItem, toggleMenu } =
   useAppMenu()
@@ -111,7 +108,6 @@ const getButtonStyle = (index: number): CSSProperties => {
 
 const handleSelectItem = (itemId: string) => {
   handleUpdateActiveItem(itemId)
-  router.push({ name: ROUTER_NAME_LIST[itemId.toUpperCase() + '_PAGE'] })
 }
 
 const getButtonClass = (itemId: string) => {

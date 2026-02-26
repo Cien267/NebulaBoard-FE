@@ -6,10 +6,8 @@
 
     <div class="flex flex-1">
       <!-- Main Content -->
-      <main class="h-full flex-1 flex flex-col grow relative">
-        <div class="flex-1 z-10">
-          <slot />
-        </div>
+      <main class="min-h-[calc(100vh-80px)] flex-1 flex flex-col grow relative">
+        <slot />
       </main>
     </div>
 

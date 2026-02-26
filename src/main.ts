@@ -1,5 +1,5 @@
 import './assets/css/main.css'
-import Material from '@primeuix/themes/material'
+import Aura from '@primeuix/themes/aura'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { definePreset } from '@primeuix/themes'
@@ -13,7 +13,7 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
-const MyPreset = definePreset(Material, {
+const MyPreset = definePreset(Aura, {
   semantic: {
     primary: {
       50: '{slate.50}',

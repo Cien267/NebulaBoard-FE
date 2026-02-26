@@ -5,6 +5,8 @@ import TaskIcon from '@/components/icons/TaskIcon.vue'
 import JournalIcon from '@/components/icons/JournalIcon.vue'
 import MusicIcon from '@/components/icons/MusicIcon.vue'
 import SettingIcon from '@/components/icons/SettingIcon.vue'
+import { useRouter } from 'vue-router'
+import { ROUTER_NAME_LIST } from '@/constants/routers'
 
 const LOCALSTORAGE_ACTIVE_ITEM_KEY = 'activeItem'
 const isMenuOpen = ref(false)
@@ -16,12 +18,14 @@ const navItems = shallowRef([
   { id: 'notes', label: 'Notes', icon: NoteIcon, isActive: false },
   { id: 'dashboard', label: 'Dashboard', icon: DashboardIcon, isActive: true },
 ])
-const activeItem = ref(localStorage.getItem(LOCALSTORAGE_ACTIVE_ITEM_KEY) ?? 'dashboard')
+const activeItem = ref('dashboard')
 const activeItemLabel = computed(() => {
   return navItems.value.find((item) => item.id === activeItem.value)?.label
 })
 
 export const useAppMenu = () => {
+  const router = useRouter()
+
   const toggleMenu = () => {
     isMenuOpen.value = !isMenuOpen.value
   }
@@ -34,7 +38,10 @@ export const useAppMenu = () => {
     })
     navItems.value.sort((a, b) => Number(a.isActive) - Number(b.isActive))
     isMenuOpen.value = false
+    router.push({ name: ROUTER_NAME_LIST[itemId.toUpperCase() + '_PAGE'] })
   }
+
+  handleUpdateActiveItem(localStorage.getItem(LOCALSTORAGE_ACTIVE_ITEM_KEY) || 'dashboard')
 
   return {
     isMenuOpen,
