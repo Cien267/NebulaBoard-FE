@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import SelectButton from 'primevue/selectbutton'
-import TaskListMode from '../components/TaskListMode.vue'
+import TaskListMode from '../components/task-list/TaskListMode.vue'
 import TaskRichTextMode from '../components/TaskRichTextMode.vue'
 
 const modes = ref(['List', 'Rich Text'])
@@ -29,7 +29,7 @@ const selectedMode = ref('List')
       <!-- Content Area -->
       <div class="relative w-full h-full animate-fade-in-up delay-200">
         <Transition name="fade-slide" mode="out-in">
-          <TaskListMode v-if="selectedMode === 'List'" class="w-full max-w-3xl mx-auto" />
+          <TaskListMode v-if="selectedMode === 'List'" />
           <TaskRichTextMode v-else class="w-full" />
         </Transition>
       </div>
