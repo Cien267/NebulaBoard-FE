@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import Button from 'primevue/button'
+import UpsertTask from './UpsertTask.vue'
 
 const { selectedStatus } = defineProps(['selectedStatus'])
-const emit = defineEmits(['open-create-dialog'])
+const upsertTaskRef = ref()
 </script>
 
 <template>
@@ -24,7 +26,8 @@ const emit = defineEmits(['open-create-dialog'])
       label="Create Task"
       icon="pi pi-plus"
       class="mt-6 rounded-xl"
-      @click="emit('open-create-dialog')"
+      @click="upsertTaskRef.open()"
     />
   </div>
+  <UpsertTask ref="upsertTaskRef" />
 </template>

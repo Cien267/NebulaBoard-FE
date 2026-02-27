@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed top-20 left-10 z-9999">
+  <div class="fixed top-20 left-10 z-999">
     <div class="relative">
       <button
         @click="toggleMenu"

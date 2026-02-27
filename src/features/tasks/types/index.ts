@@ -5,7 +5,7 @@ export interface Task {
   createdDate: number // timestamp
   priority: 'low' | 'medium' | 'high'
   tags: string[]
-  deadline?: number // timestamp
+  deadline?: Date // timestamp
   estimatedTime?: number // in minutes
 }
 

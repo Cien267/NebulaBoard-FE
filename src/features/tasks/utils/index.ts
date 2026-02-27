@@ -1,26 +1,26 @@
-export const getPrioritySeverity = (priority: string) => {
+export const getPriorityClasses = (priority: string) => {
   switch (priority) {
     case 'high':
-      return 'danger'
+      return 'bg-red-100 text-red-600'
     case 'medium':
-      return 'warn'
+      return 'bg-amber-100 text-amber-600'
     case 'low':
-      return 'success'
+      return 'bg-emerald-100 text-emerald-600'
     default:
-      return 'info'
+      return ''
   }
 }
 
-export const getStatusSeverity = (status: string) => {
+export const getStatusClasses = (status: string) => {
   switch (status) {
     case 'todo':
-      return 'secondary'
+      return 'bg-slate-400'
     case 'in_progress':
-      return 'info'
+      return 'bg-blue-500'
     case 'done':
-      return 'success'
+      return 'bg-green-500'
     default:
-      return 'info'
+      return ''
   }
 }
 
