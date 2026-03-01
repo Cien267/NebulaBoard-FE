@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { liveQuery } from 'dexie'
 import { db } from '../../db/taskDb'
-import type { Task, TaskStatusType } from '../../types'
+import type { Task, TaskStatusFilterType, TaskPriorityFilterType } from '../../types'
 import dayjs from 'dayjs'
 import TaskListFilters from './TaskListFilters.vue'
 import TaskListEmptyState from './TaskListEmptyState.vue'
@@ -26,8 +26,8 @@ onUnmounted(() => {
   if (subscription) subscription.unsubscribe()
 })
 
-const selectedStatus = ref<TaskStatusType>('all')
-
+const selectedStatus = ref<TaskStatusFilterType>('all')
+const selectedPriority = ref<TaskPriorityFilterType>('all')
 const upsertTaskRef = ref()
 
 const groupedTasks = computed(() => {
@@ -36,6 +36,11 @@ const groupedTasks = computed(() => {
   tasks.value.forEach((task) => {
     // filter by status
     if (selectedStatus.value !== 'all' && task.status !== selectedStatus.value) {
+      return
+    }
+
+    // filter by priority
+    if (selectedPriority.value !== 'all' && task.priority !== selectedPriority.value) {
       return
     }
 
@@ -77,7 +82,9 @@ const groupedTasks = computed(() => {
     <!-- Left Sidebar: Filters -->
     <TaskListFilters
       :selected-status="selectedStatus"
-      @handle-filter="(status) => (selectedStatus = status)"
+      :selected-priority="selectedPriority"
+      @handle-filter-by-status="(status) => (selectedStatus = status)"
+      @handle-filter-by-priority="(priority) => (selectedPriority = priority)"
     ></TaskListFilters>
 
     <!-- Main Content: Task List -->
@@ -85,7 +92,8 @@ const groupedTasks = computed(() => {
       <!-- Top Action Bar -->
       <div class="flex justify-between items-center rounded-2xl shadow-md p-4">
         <h2 class="text-xl font-bold text-sky-900 capitalize">
-          {{ selectedStatus.replace('_', ' ') }} Tasks
+          {{ selectedStatus.replace('_', ' ') }} Tasks -
+          {{ selectedPriority.replace('_', ' ') }} Priority
         </h2>
         <Button
           icon="pi pi-plus"

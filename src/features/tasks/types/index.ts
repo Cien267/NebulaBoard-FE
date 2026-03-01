@@ -9,4 +9,6 @@ export interface Task {
   estimatedTime?: number // in minutes
 }
 
-export type TaskStatusType = 'all' | 'todo' | 'in_progress' | 'done'
+export type TaskStatusFilterType = 'all' | 'todo' | 'in_progress' | 'done'
+
+export type TaskPriorityFilterType = 'all' | 'low' | 'medium' | 'high'

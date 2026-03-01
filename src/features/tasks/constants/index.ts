@@ -1,5 +1,3 @@
-export const TASK_STATUSES = ['all', 'todo', 'in_progress', 'done']
-
 export const TASK_STATUS_OPTIONS = [
   {
     value: 'todo',
