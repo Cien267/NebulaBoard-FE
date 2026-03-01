@@ -79,6 +79,12 @@
       </button>
     </div>
   </div>
+  <div
+    v-if="isMenuOpen"
+    className="fixed inset-0 z-99
+    flex items-center justify-center
+    bg-slate-800/40 backdrop-blur-xs"
+  ></div>
 </template>
 
 <script setup lang="ts">

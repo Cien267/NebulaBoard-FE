@@ -34,6 +34,7 @@ async function deleteTask(id: string) {
   <div
     :key="task.id"
     class="group relative flex flex-col gap-4 p-4 rounded-2xl border border-slate-200/60 bg-white/70 backdrop-blur-md shadow-sm hover:shadow-xl hover:-translate-y-[2px] transition-all duration-300 overflow-hidden"
+    :class="{ 'bg-slate-100! opacity-60': task.status === 'done' }"
   >
     <div class="flex items-start gap-4 relative z-10">
       <!-- checkbox -->

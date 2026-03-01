@@ -96,6 +96,7 @@ const groupedTasks = computed(() => {
           {{ selectedPriority.replace('_', ' ') }} Priority
         </h2>
         <Button
+          severity="info"
           icon="pi pi-plus"
           label="New Task"
           @click="upsertTaskRef.open()"
@@ -119,7 +120,7 @@ const groupedTasks = computed(() => {
           <!-- Progress Bar -->
           <div class="h-2 w-full bg-slate-200 rounded-full overflow-hidden">
             <div
-              class="h-full bg-sky-500 transition-all duration-500 ease-out"
+              class="h-full bg-cyan-500 transition-all duration-500 ease-out"
               :style="{ width: `${group.progress}%` }"
             ></div>
           </div>

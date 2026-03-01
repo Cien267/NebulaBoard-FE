@@ -12,3 +12,10 @@ export interface Task {
 export type TaskStatusFilterType = 'all' | 'todo' | 'in_progress' | 'done'
 
 export type TaskPriorityFilterType = 'all' | 'low' | 'medium' | 'high'
+
+export interface RichTextNote {
+  id: string
+  title: string
+  content: string
+  updatedDate: number
+}

@@ -20,7 +20,7 @@ const open = (taskData?: Task) => {
     status: taskData?.status ?? 'todo',
     priority: taskData?.priority ?? 'low',
     tags: taskData?.tags?.join(',') ?? '',
-    deadline: taskData?.deadline ?? undefined,
+    deadline: taskData?.deadline ?? new Date(new Date().setHours(23, 59, 59, 999)),
     estimatedTime: taskData?.estimatedTime ?? null,
   }
 
@@ -42,7 +42,7 @@ async function saveTask() {
       .split(',')
       .map((t: string) => t.trim())
       .filter(Boolean),
-    deadline: form.value.deadline || undefined,
+    deadline: form.value.deadline || new Date(new Date().setHours(23, 59, 59, 999)),
     estimatedTime: form.value.estimatedTime || undefined,
   }
 
@@ -66,7 +66,7 @@ async function saveTask() {
     <div class="flex flex-col gap-4 mt-2">
       <!-- Title -->
       <div class="flex flex-col gap-2">
-        <label class="font-medium text-sky-700">Title</label>
+        <label class="font-medium text-slate-700">Title <span class="text-red-500">*</span></label>
         <InputText
           v-model="form.title"
           placeholder="What needs to be done?"
@@ -78,7 +78,7 @@ async function saveTask() {
       <!-- Status & Priority -->
       <div class="grid grid-cols-2 gap-4">
         <div class="flex flex-col gap-2">
-          <label class="font-medium text-sky-700">Status</label>
+          <label class="font-medium text-slate-700">Status</label>
           <Select
             v-model="form.status"
             :options="TASK_STATUS_OPTIONS"
@@ -88,7 +88,7 @@ async function saveTask() {
           />
         </div>
         <div class="flex flex-col gap-2">
-          <label class="font-medium text-sky-700">Priority</label>
+          <label class="font-medium text-slate-700">Priority</label>
           <Select
             v-model="form.priority"
             :options="TASK_PRIORITY_OPTIONS"
@@ -101,8 +101,8 @@ async function saveTask() {
 
       <!-- Tags -->
       <div class="flex flex-col gap-2">
-        <label class="font-medium text-sky-700"
-          >Tags <span class="text-xs text-sky-400 font-normal">(comma separated)</span></label
+        <label class="font-medium text-slate-700"
+          >Tags <span class="text-sm text-slate-500 font-normal">(comma separated)</span></label
         >
         <InputText v-model="form.tags" placeholder="e.g. feature, bug, design" class="rounded-lg" />
       </div>
@@ -110,11 +110,11 @@ async function saveTask() {
       <!-- Deadline & Estimated Time -->
       <div class="grid grid-cols-2 gap-4">
         <div class="flex flex-col gap-2">
-          <label class="font-medium text-sky-700">Deadline</label>
+          <label class="font-medium text-slate-700">Deadline</label>
           <DatePicker id="datepicker-24h" v-model="form.deadline" showTime hourFormat="24" fluid />
         </div>
         <div class="flex flex-col gap-2">
-          <label class="font-medium text-sky-700">Est. Time (mins)</label>
+          <label class="font-medium text-slate-700">Est. Time (mins)</label>
           <input
             type="number"
             v-model.number="form.estimatedTime"
@@ -135,7 +135,8 @@ async function saveTask() {
           class="rounded-xl px-4"
         />
         <Button
-          label="Save Task"
+          severity="info"
+          label="Save"
           icon="pi pi-check"
           @click="saveTask"
           :disabled="!form.title.trim()"
