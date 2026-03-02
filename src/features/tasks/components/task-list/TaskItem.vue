@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { getPriorityClasses, getStatusClasses } from '../../utils'
 import { db } from '../../db/taskDb'
 import type { Task } from '../../types'
@@ -10,8 +10,13 @@ import Checkbox from 'primevue/checkbox'
 
 const { task } = defineProps(['task'])
 const upsertTaskRef = ref()
+const isDisabledTaskAction = computed(() => {
+  const createdDate = dayjs(task.createdDate)
+  return createdDate.isBefore(dayjs().startOf('day'))
+})
 
 async function toggleTaskStatus(task: Task, checked: boolean) {
+  if (isDisabledTaskAction.value) return
   try {
     await db.tasks.update(task.id, {
       status: checked ? 'done' : 'todo',
@@ -43,6 +48,7 @@ async function deleteTask(id: string) {
           :modelValue="task.status === 'done'"
           @update:modelValue="toggleTaskStatus(task, $event)"
           :binary="true"
+          :disabled="isDisabledTaskAction"
           class="scale-110"
         />
       </div>
@@ -50,7 +56,7 @@ async function deleteTask(id: string) {
       <!-- content -->
       <div
         class="flex flex-col gap-2 grow min-w-0 cursor-pointer"
-        @click="upsertTaskRef.open(task)"
+        @click="!isDisabledTaskAction ? upsertTaskRef.open(task) : () => {}"
       >
         <!-- title + status -->
         <div class="flex flex-wrap items-center gap-2">
@@ -102,7 +108,10 @@ async function deleteTask(id: string) {
       </div>
 
       <!-- actions -->
-      <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition">
+      <div
+        v-if="!isDisabledTaskAction"
+        class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition"
+      >
         <Button
           icon="pi pi-pencil"
           text

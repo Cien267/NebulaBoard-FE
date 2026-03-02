@@ -9,6 +9,7 @@ import TaskListEmptyState from './TaskListEmptyState.vue'
 import Button from 'primevue/button'
 import UpsertTask from './UpsertTask.vue'
 import TaskItem from './TaskItem.vue'
+import TaskCompleteStreak from './TaskCompleteStreak.vue'
 
 const tasks = ref<Task[]>([])
 let subscription: any = null
@@ -95,13 +96,18 @@ const groupedTasks = computed(() => {
           {{ selectedStatus.replace('_', ' ') }} Tasks -
           {{ selectedPriority.replace('_', ' ') }} Priority
         </h2>
-        <Button
-          severity="info"
-          icon="pi pi-plus"
-          label="New Task"
-          @click="upsertTaskRef.open()"
-          class="rounded-xl px-5 font-bold shadow-sm hover:shadow-md transition-all bg-slate-600 hover:bg-slate-500 text-white border-none"
-        />
+
+        <div class="flex items-center gap-6">
+          <TaskCompleteStreak :groupedTasks="groupedTasks" />
+
+          <Button
+            severity="info"
+            icon="pi pi-plus"
+            label="New Task"
+            @click="upsertTaskRef.open()"
+            class="rounded-xl px-5 font-bold shadow-sm hover:shadow-md transition-all bg-slate-600 hover:bg-slate-500 text-white border-none"
+          />
+        </div>
       </div>
 
       <!-- Task Groups -->
