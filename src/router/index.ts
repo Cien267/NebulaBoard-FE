@@ -33,12 +33,12 @@ const router = createRouter({
       component: DashboardPage,
       meta: { requiresAuth: false },
     },
-    // {
-    //   path: '/notes',
-    //   name: ROUTER_NAME_LIST.NOTES_PAGE,
-    //   component: DashboardPage,
-    //   meta: { requiresAuth: false },
-    // },
+    {
+      path: '/notes',
+      name: ROUTER_NAME_LIST.NOTES_PAGE,
+      component: () => import('@/features/notes/views/NotesPage.vue'),
+      meta: { requiresAuth: false },
+    },
     {
       path: '/tasks',
       name: ROUTER_NAME_LIST.TASKS_PAGE,
