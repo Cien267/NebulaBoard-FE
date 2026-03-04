@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
 import Editor from 'primevue/editor'
-import { db } from '../db/taskDb'
+import { db } from '@/db/idb'
 import { debounce } from 'lodash-es'
 
 const noteId = 'nebula-board-rich-text-task'
@@ -18,7 +18,7 @@ onMounted(async () => {
 const saveToDb = debounce(async (newContent: string) => {
   isSaving.value = true
   try {
-    await db.notes.put({
+    await db.taskText.put({
       id: noteId,
       title: 'Rich Text Task',
       content: newContent,

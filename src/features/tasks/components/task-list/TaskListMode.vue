@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { liveQuery } from 'dexie'
-import { db } from '../../db/taskDb'
+import { db } from '@/db/idb'
 import type { Task, TaskStatusFilterType, TaskPriorityFilterType } from '../../types'
 import dayjs from 'dayjs'
 import TaskListFilters from './TaskListFilters.vue'
@@ -141,7 +141,11 @@ const groupedTasks = computed(() => {
       </div>
 
       <!-- Empty State -->
-      <TaskListEmptyState v-else :selected-status="selectedStatus"></TaskListEmptyState>
+      <TaskListEmptyState
+        v-else
+        :selected-status="selectedStatus"
+        :selected-priority="selectedPriority"
+      ></TaskListEmptyState>
     </div>
 
     <!-- Create/Edit Task Dialog -->

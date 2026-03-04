@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { getPriorityClasses, getStatusClasses } from '../../utils'
-import { db } from '../../db/taskDb'
+import { db } from '@/db/idb'
 import type { Task } from '../../types'
 import dayjs from 'dayjs'
 import UpsertTask from './UpsertTask.vue'

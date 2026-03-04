@@ -5,7 +5,7 @@ import Dialog from 'primevue/dialog'
 import Select from 'primevue/select'
 import { TASK_STATUS_OPTIONS, TASK_PRIORITY_OPTIONS } from '../../constants'
 import DatePicker from 'primevue/datepicker'
-import { db } from '../../db/taskDb'
+import { db } from '@/db/idb'
 import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
 

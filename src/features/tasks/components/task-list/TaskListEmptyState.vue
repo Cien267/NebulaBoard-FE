@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import Button from 'primevue/button'
 import UpsertTask from './UpsertTask.vue'
 
-const { selectedStatus } = defineProps(['selectedStatus'])
+const { selectedStatus, selectedPriority } = defineProps(['selectedStatus', 'selectedPriority'])
 const upsertTaskRef = ref()
 </script>
 
@@ -19,10 +19,12 @@ const upsertTaskRef = ref()
     <p class="text-xl font-bold text-slate-700">No tasks found</p>
     <p class="text-base mt-2 max-w-sm text-center">
       There are no tasks matching your current filter.
-      <span v-if="selectedStatus === 'all'">Create a new task to get started.</span>
+      <span v-if="selectedStatus === 'all' && selectedPriority === 'all'"
+        >Create a new task to get started.</span
+      >
     </p>
     <Button
-      v-if="selectedStatus === 'all'"
+      v-if="selectedStatus === 'all' && selectedPriority === 'all'"
       label="Create Task"
       icon="pi pi-plus"
       class="mt-6 rounded-xl"
