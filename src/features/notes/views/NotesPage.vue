@@ -44,14 +44,11 @@ const handleUpdateNote = async (id: string, updates: Partial<Note>) => {
 }
 
 const handleDeleteNote = async (id: string) => {
-  // simple confirm
-  if (confirm('Are you sure you want to delete this note?')) {
-    try {
-      await notesService.deleteNote(id)
-      await fetchNotes()
-    } catch (err) {
-      console.error('Failed to delete note:', err)
-    }
+  try {
+    await notesService.deleteNote(id)
+    await fetchNotes()
+  } catch (err) {
+    console.error('Failed to delete note:', err)
   }
 }
 

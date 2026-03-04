@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import InputText from 'primevue/inputtext'
 import Textarea from 'primevue/textarea'
 import Button from 'primevue/button'
+import { NOTE_COLORS } from '../constants'
 
 const emit = defineEmits<{
   (
@@ -17,18 +18,6 @@ const content = ref('')
 const color = ref('bg-white')
 const inputContainer = ref<HTMLElement | null>(null)
 const textareaRef = ref<HTMLTextAreaElement | null>(null)
-
-const colors = [
-  { name: 'Default', class: 'bg-white!' },
-  { name: 'Red', class: 'bg-red-100!' },
-  { name: 'Orange', class: 'bg-orange-100!' },
-  { name: 'Yellow', class: 'bg-yellow-100!' },
-  { name: 'Green', class: 'bg-green-100!' },
-  { name: 'Teal', class: 'bg-teal-100!' },
-  { name: 'Blue', class: 'bg-blue-100!' },
-  { name: 'Purple', class: 'bg-purple-100!' },
-  { name: 'Pink', class: 'bg-pink-100!' },
-]
 
 const expand = () => {
   if (!isExpanded.value) {
@@ -124,7 +113,7 @@ onUnmounted(() => {
             <!-- Color Picker Dropdown Simulator -->
             <div class="flex p-2 z-10 gap-2 w-max">
               <span
-                v-for="c in colors"
+                v-for="c in NOTE_COLORS"
                 :key="c.name"
                 @click="color = c.class"
                 :class="[
