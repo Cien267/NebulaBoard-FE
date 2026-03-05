@@ -51,12 +51,12 @@ const router = createRouter({
     //   component: DashboardPage,
     //   meta: { requiresAuth: false },
     // },
-    // {
-    //   path: '/music',
-    //   name: ROUTER_NAME_LIST.MUSIC_PAGE,
-    //   component: DashboardPage,
-    //   meta: { requiresAuth: false },
-    // },
+    {
+      path: '/music',
+      name: ROUTER_NAME_LIST.MUSIC_PAGE,
+      component: () => import('@/features/music/views/MusicPage.vue'),
+      meta: { requiresAuth: false },
+    },
     // {
     //   path: '/settings',
     //   name: ROUTER_NAME_LIST.SETTINGS_PAGE,
